@@ -18,8 +18,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    final public static String KEY_THEME = "theme";
-    final public static String KEY_NOTE_TEXT = "note";
     final public static String KEY_POSITION = "position";
 
     ListView ThemesListView;
@@ -41,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
                         String name = returnedIntent.getStringExtra("namesite");
                         String url = returnedIntent.getStringExtra("urlsite");
                         String login = returnedIntent.getStringExtra("login");
-                        String pass = returnedIntent.getStringExtra("passord");
+                        String password = returnedIntent.getStringExtra("password");
                         //обновить БД и интерфейс
-                        db.updateNote(id,name,url,login,pass);
+                        db.updateNote(id,name,url,login,password);
                         noteAdapter = AdapterUpdate();
                     }
                     else
@@ -72,17 +70,17 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 //Добыть данные из адаптера
-                String theme = ((Cursor) noteAdapter.getItem(position)).getString(1);
-                String note = ((Cursor) noteAdapter.getItem(position)).getString(2);
+                String name = ((Cursor) noteAdapter.getItem(position)).getString(1);
+                String url = ((Cursor) noteAdapter.getItem(position)).getString(2);
                 String login = ((Cursor) noteAdapter.getItem(position)).getString(3);
                 String password = ((Cursor) noteAdapter.getItem(position)).getString(4);
 
                 Toast.makeText(MainActivity.this, login, Toast.LENGTH_SHORT).show();
                 //отправить данные в дочернюю акливити
-                NoteIntent.putExtra("namesite", theme);
-                NoteIntent.putExtra("urlsite", note);
+                NoteIntent.putExtra("namesite", name);
+                NoteIntent.putExtra("urlsite", url);
                 NoteIntent.putExtra("login", login);
-                NoteIntent.putExtra("passord", password);
+                NoteIntent.putExtra("password", password);
 
 
                 //id - идентификатор записи в БД

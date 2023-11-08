@@ -10,19 +10,19 @@ import android.widget.SimpleCursorAdapter;
 public class DataBaseAccessor extends SQLiteOpenHelper
 {
     // Основные данные базы
-    private static final String DATABASE_NAME = "db5.db";
-    private static final int DB_VERSION = 3;
+    private static final String DATABASE_NAME = "db6.db";
+    private static final int DB_VERSION = 4;
 
     // таблицы
-    private static final String TABLE_NOTE = "NOTE";
+    private static final String TABLE_MANAGERPASSWORDS = "NOTE";
 
 
     // столбцы таблицы Note
     private static final String COLUMN_ID = "_id";//Обязательно с подчеркиванием
-    private static final String COLUMN_THEME = "namesite";
-    private static final String COLUMN_NOTE = "url";
-    private static final String COLUMN_NOTE1 = "login";
-    private static final String COLUMN_NOTE2 = "parol";
+    private static final String COLUMN_NAME = "namesite";
+    private static final String COLUMN_URL = "url";
+    private static final String COLUMN_LOGIN = "login";
+    private static final String COLUMN_PASSWORD = "parol";
 
     public DataBaseAccessor(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -31,51 +31,43 @@ public class DataBaseAccessor extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Создать таблицу
-        db.execSQL("CREATE TABLE " + TABLE_NOTE + "("
+        db.execSQL("CREATE TABLE " + TABLE_MANAGERPASSWORDS + "("
                                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                + COLUMN_THEME + " TEXT,"
-                                + COLUMN_NOTE + " TEXT,"
-                                + COLUMN_NOTE1 + " TEXT,"
-                                + COLUMN_NOTE2 + " TEXT);");
+                                + COLUMN_NAME + " TEXT,"
+                                + COLUMN_URL + " TEXT,"
+                                + COLUMN_LOGIN + " TEXT,"
+                                + COLUMN_PASSWORD + " TEXT);");
 
         // Добавить пару записей в таблицу
-        db.execSQL("INSERT INTO " + TABLE_NOTE + "(" + COLUMN_THEME + ", "+ COLUMN_NOTE + ", "+ COLUMN_NOTE1 + ", "+ COLUMN_NOTE2 +") values('имя сайта1','сслылка','login1','parol')");
-        db.execSQL("INSERT INTO " + TABLE_NOTE + "(" + COLUMN_THEME + ", "+ COLUMN_NOTE + ", "+ COLUMN_NOTE1 + ", "+ COLUMN_NOTE2 +") values('имя сайта2','сслылка','login1','parol')");
+        db.execSQL("INSERT INTO " + TABLE_MANAGERPASSWORDS + "(" + COLUMN_NAME + ", "+ COLUMN_URL + ", "+ COLUMN_LOGIN + ", "+ COLUMN_PASSWORD +") values('Google','https://www.google.ru/','1234','21IT17')");
+        db.execSQL("INSERT INTO " + TABLE_MANAGERPASSWORDS + "(" + COLUMN_NAME + ", "+ COLUMN_URL + ", "+ COLUMN_LOGIN + ", "+ COLUMN_PASSWORD +") values('Яндекс','https://ya.ru/','65393','WcsPQLdcs')");
+        db.execSQL("INSERT INTO " + TABLE_MANAGERPASSWORDS + "(" + COLUMN_NAME + ", "+ COLUMN_URL + ", "+ COLUMN_LOGIN + ", "+ COLUMN_PASSWORD +") values('ВК','https://vk.com/','Ильдар','Egthhdrgf')");
+        db.execSQL("INSERT INTO " + TABLE_MANAGERPASSWORDS + "(" + COLUMN_NAME + ", "+ COLUMN_URL + ", "+ COLUMN_LOGIN + ", "+ COLUMN_PASSWORD +") values('Яндекс Диск','https://disk.yandex.com.am/client/disk','76458854','QfbgPOSKCmdsp')");
     }
 
-    /**
-     * получить адаптер для listview.
-     * @param layout  - разметка отдельного элемента listview
-     * @param viewIds - идентификаторы элементов разметки ListView
-     */
     public SimpleCursorAdapter getCursorAdapter(Context context,int layout, int[] viewIds)
     {
         // запрос данных для отображения
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_NOTE,null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + TABLE_MANAGERPASSWORDS,null);
 
         // какие столбцы и в каком порядке показывать в listview
-        String[] columns = new  String[] {COLUMN_THEME,COLUMN_NOTE,COLUMN_NOTE1,COLUMN_NOTE2};
+        String[] columns = new  String[] {COLUMN_NAME,COLUMN_URL,COLUMN_LOGIN,COLUMN_PASSWORD};
 
         // создание адаптера
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(context,layout,cursor,columns,viewIds,0);
         return  adapter;
     }
 
-    /**
-     * Обновить данные в БД
-     * @param id - идентификатор записи в БД
-     * @param theme - тема заметки
-     * @param note - текст заметки
-     */
-    public void updateNote(int id, String theme,String note,String note2,String note3)
+
+    public void updateNote(int id, String name,String url,String login,String password)
     {
         // выполнить запрос на обновление БД
-        getReadableDatabase().execSQL("UPDATE "+ TABLE_NOTE
+        getReadableDatabase().execSQL("UPDATE "+ TABLE_MANAGERPASSWORDS
                                         + " SET "
-                                        + COLUMN_THEME + "='" + theme + "', "
-                                        + COLUMN_NOTE1 + "='" + note2 + "', "
-                                        + COLUMN_NOTE2 + "='" + note3 + "', "
-                                        + COLUMN_NOTE + "='" + note + "'"
+                                        + COLUMN_NAME + "='" + name + "', "
+                                        + COLUMN_LOGIN + "='" + login + "', "
+                                        + COLUMN_PASSWORD + "='" + password + "', "
+                                        + COLUMN_URL + "='" + url + "'"
                                         + " WHERE "
                                         + COLUMN_ID + "=" + id);
     }
@@ -85,7 +77,7 @@ public class DataBaseAccessor extends SQLiteOpenHelper
         try
         {
             //удалить старую таблицу
-            db.execSQL("DROP TABLE " + TABLE_NOTE);
+            db.execSQL("DROP TABLE " + TABLE_MANAGERPASSWORDS);
         }
         catch (Exception exception)
         {
