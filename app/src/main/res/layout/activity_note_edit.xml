@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:onClick="OnBackButtonClick"
         android:text="Назад"
-        android:textColor="#62FD00"
+        android:textColor="#FF0202"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,8 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
         android:ems="10"
-        android:textColor="#62FD00"
+        android:textColor="@color/toxic"
         android:inputType="text"
+        android:background="@drawable/square"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/backButton"
@@ -32,37 +33,40 @@
 
     <EditText
         android:id="@+id/urlEditText"
-        android:layout_width="377dp"
-        android:layout_height="47dp"
+        android:layout_width="358dp"
+        android:layout_height="43dp"
         android:layout_marginTop="48dp"
+        android:background="@drawable/square"
         android:ems="10"
-        android:textColor="#62FD00"
         android:inputType="text"
         android:text="Name"
+        android:textColor="@color/toxic"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         tools:layout_editor_absoluteX="16dp" />
 
     <EditText
         android:id="@+id/loginEditText"
-        android:layout_width="377dp"
-        android:layout_height="47dp"
+        android:layout_width="360dp"
+        android:layout_height="49dp"
         android:layout_marginTop="108dp"
+        android:background="@drawable/square"
         android:ems="10"
-        android:textColor="#62FD00"
         android:inputType="text"
         android:text="Name"
+        android:textColor="@color/toxic"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         tools:layout_editor_absoluteX="18dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="377dp"
-        android:layout_height="47dp"
+        android:layout_width="359dp"
+        android:layout_height="45dp"
         android:layout_marginTop="168dp"
+        android:background="@drawable/square"
         android:ems="10"
-        android:textColor="#62FD00"
         android:inputType="text"
         android:text="Name"
+        android:textColor="@color/toxic"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         tools:layout_editor_absoluteX="18dp" />
 
