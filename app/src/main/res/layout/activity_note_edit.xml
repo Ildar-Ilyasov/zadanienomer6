@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7A0A0A"
+    android:background="@drawable/oboidlyamanagerpassword2"
     tools:context=".NoteEditActivity">
 
     <Button
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:onClick="OnBackButtonClick"
         android:text="Назад"
-        android:textColor="#7A0A0A"
+        android:textColor="#62FD00"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
