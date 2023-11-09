@@ -8,7 +8,7 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/toxic" >
+        android:color="@color/cian" >
     </stroke>
     <corners
         android:radius="2dp"   >

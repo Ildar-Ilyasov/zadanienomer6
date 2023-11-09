@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/oboidlyamanagerpassword2"
+    android:background="@drawable/oboidlyamanagerpassword"
     tools:context=".NoteEditActivity">
 
     <Button
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:onClick="OnBackButtonClick"
         android:text="Назад"
-        android:textColor="#FF0202"
+        android:textColor="#FF0000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
         android:ems="10"
-        android:textColor="@color/toxic"
+        android:textColor="@color/cian"
         android:inputType="text"
         android:background="@drawable/square"
         android:text="Name"
@@ -40,7 +40,7 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        android:textColor="@color/toxic"
+        android:textColor="@color/cian"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         tools:layout_editor_absoluteX="16dp" />
 
@@ -53,7 +53,7 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        android:textColor="@color/toxic"
+        android:textColor="@color/cian"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         tools:layout_editor_absoluteX="18dp" />
 
@@ -66,7 +66,7 @@
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        android:textColor="@color/toxic"
+        android:textColor="@color/cian"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText"
         tools:layout_editor_absoluteX="18dp" />
 
