@@ -32,8 +32,7 @@ public class NoteEditActivity extends AppCompatActivity {
         Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION,-1);
     }
 
-    public void OnBackButtonClick(View view)
-    {
+    public void OnBackButtonClick(View view) {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("namesite",NameEditText.getText().toString());
         returnIntent.putExtra("urlsite",UrlEditText.getText().toString());

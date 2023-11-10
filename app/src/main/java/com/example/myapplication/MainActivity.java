@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    // все ли хорошо при получении данных из дочерней активити?
                     if(result.getResultCode() == Activity.RESULT_OK)
                     {
                         //получить данные
