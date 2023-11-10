@@ -16,7 +16,6 @@ public class DataBaseAccessor extends SQLiteOpenHelper
     // таблицы
     private static final String TABLE_MANAGERPASSWORDS = "NOTE";
 
-
     // столбцы таблицы Note
     private static final String COLUMN_ID = "_id";//Обязательно с подчеркиванием
     private static final String COLUMN_NAME = "namesite";

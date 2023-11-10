@@ -30,13 +30,6 @@ public class NoteEditActivity extends AppCompatActivity {
         LoginEditText.setText(fromMainActivityIntent.getExtras().getString("login"));
         PasswordEditText.setText(fromMainActivityIntent.getExtras().getString("password"));
         Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION,-1);
-
-        if(Position == -1)
-        {
-            Log.d("Note activity","Invalid position");
-        }
-
-
     }
 
     public void OnBackButtonClick(View view)

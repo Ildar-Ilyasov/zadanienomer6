@@ -92,10 +92,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Обновляет listView путем установки нового адаптера
-     * @return Адаптер для обновления listView
-     */
     private SimpleCursorAdapter AdapterUpdate() {
         // получить адаптер из класса
         SimpleCursorAdapter adapter = db.getCursorAdapter(this,
@@ -112,9 +108,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         // закрыть БД
         db.close();
-    }
-
-    public void onAddButtonClick(View view){
-
     }
 }
