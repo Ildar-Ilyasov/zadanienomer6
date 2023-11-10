@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 NoteIntent.putExtra("login", login);
                 NoteIntent.putExtra("password", password);
 
-
                 //id - идентификатор записи в БД
                 //без приведения к int перидется и получать long а я не хотел переписывать дочернюю активити
                 NoteIntent.putExtra(KEY_POSITION, (int)id);
