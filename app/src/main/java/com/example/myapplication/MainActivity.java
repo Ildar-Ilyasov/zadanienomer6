@@ -7,7 +7,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     final public static String KEY_POSITION = "position";
+    final public static String KEY_NAME = "name";
+    final public static String KEY_URL = "url";
+    final public static String KEY_LOGIN = "login";
+    final public static String KEY_PASSWORD = "password";
+
 
     ListView ThemesListView;
 
@@ -35,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
                         //получить данные
                         Intent returnedIntent = result.getData();
                         int id = returnedIntent.getIntExtra(KEY_POSITION,-1);
-                        String name = returnedIntent.getStringExtra("namesite");
-                        String url = returnedIntent.getStringExtra("urlsite");
+                        String name = returnedIntent.getStringExtra("name");
+                        String url = returnedIntent.getStringExtra("url");
                         String login = returnedIntent.getStringExtra("login");
                         String password = returnedIntent.getStringExtra("password");
                         //обновить БД и интерфейс
@@ -76,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(MainActivity.this, login, Toast.LENGTH_SHORT).show();
                 //отправить данные в дочернюю акливити
-                NoteIntent.putExtra("namesite", name);
-                NoteIntent.putExtra("urlsite", url);
+                NoteIntent.putExtra("name", name);
+                NoteIntent.putExtra("url", url);
                 NoteIntent.putExtra("login", login);
                 NoteIntent.putExtra("password", password);
 
@@ -106,5 +113,10 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         // закрыть БД
         db.close();
+    }
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 }

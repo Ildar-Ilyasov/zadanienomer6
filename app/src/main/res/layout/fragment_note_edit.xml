@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/oboidlyamanagerpassword"
+    tools:context=".NoteEditFragment">
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="BackData"
+        android:text="Назад"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:background="@drawable/square"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        android:textColor="@color/cian"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintStart_toStartOf="@+id/backButton"
+        tools:layout_editor_absoluteY="24dp" />
+
+    <EditText
+        android:id="@+id/urlEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/square"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        android:textColor="@color/cian"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/loginEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/square"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20dp"
+        android:text="Name"
+        android:textColor="@color/cian"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        tools:layout_editor_absoluteX="18dp" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:background="@drawable/square"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="20dp"
+        android:text="Name"
+        android:textColor="@color/cian"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        tools:layout_editor_absoluteX="18dp" />
+
+</FrameLayout>

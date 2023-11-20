@@ -15,31 +15,49 @@ public class NoteEditActivity extends AppCompatActivity {
     EditText LoginEditText;
     EditText PasswordEditText;
     int Position;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_edit);
-        NameEditText = findViewById(R.id.nameEditText);
-        UrlEditText = findViewById(R.id.urlEditText);
-        LoginEditText = findViewById(R.id.loginEditText);
-        PasswordEditText = findViewById(R.id.passwordEditText);
+
         Intent fromMainActivityIntent = getIntent();
 
-        NameEditText.setText(fromMainActivityIntent.getExtras().getString("namesite"));
-        UrlEditText.setText(fromMainActivityIntent.getExtras().getString("urlsite"));
-        LoginEditText.setText(fromMainActivityIntent.getExtras().getString("login"));
-        PasswordEditText.setText(fromMainActivityIntent.getExtras().getString("password"));
-        Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION,-1);
+        String Notename = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_NAME);
+        String Noteurl = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_URL);
+        String Notelogin = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_LOGIN);
+        String Notepassword = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_PASSWORD);
+
+        //NameEditText.setText(fromMainActivityIntent.getExtras().getString("name"));
+        //UrlEditText.setText(fromMainActivityIntent.getExtras().getString("url"));
+        //LoginEditText.setText(fromMainActivityIntent.getExtras().getString("login"));
+        //PasswordEditText.setText(fromMainActivityIntent.getExtras().getString("password"));
+        //Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION, -1);
+
+        //создание фрагмента
+        NoteEditFragment fragment = new NoteEditFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(MainActivity.KEY_NAME, Notename);
+        bundle.putString(MainActivity.KEY_URL, Noteurl);
+        bundle.putString(MainActivity.KEY_LOGIN, Notelogin);
+        bundle.putString(MainActivity.KEY_PASSWORD, Notepassword);
+        fragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
+
+        Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION, -1);
+
     }
 
-    public void OnBackButtonClick(View view) {
+    public void BackData(String name,String url,String login,String password) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("namesite",NameEditText.getText().toString());
-        returnIntent.putExtra("urlsite",UrlEditText.getText().toString());
-        returnIntent.putExtra("login",LoginEditText.getText().toString());
-        returnIntent.putExtra("password",PasswordEditText.getText().toString());
-        returnIntent.putExtra(MainActivity.KEY_POSITION,Position);
-        setResult(RESULT_OK,returnIntent);
+        returnIntent.putExtra(MainActivity.KEY_NAME, name);
+        returnIntent.putExtra(MainActivity.KEY_URL, url);
+        returnIntent.putExtra(MainActivity.KEY_LOGIN, login);
+        returnIntent.putExtra(MainActivity.KEY_PASSWORD, password);
+        returnIntent.putExtra(MainActivity.KEY_POSITION, Position);
+        setResult(RESULT_OK, returnIntent);
         finish();
 
     }

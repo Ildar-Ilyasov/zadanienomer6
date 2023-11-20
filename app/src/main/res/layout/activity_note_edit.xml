@@ -7,67 +7,10 @@
     android:background="@drawable/oboidlyamanagerpassword"
     tools:context=".NoteEditActivity">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="OnBackButtonClick"
-        android:text="Назад"
-        android:textColor="#FF0000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/nameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:ems="10"
-        android:textColor="@color/cian"
-        android:inputType="text"
-        android:background="@drawable/square"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/backButton"
-        tools:layout_editor_absoluteY="3dp" />
-
-    <EditText
-        android:id="@+id/urlEditText"
-        android:layout_width="358dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/square"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:textColor="@color/cian"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <EditText
-        android:id="@+id/loginEditText"
-        android:layout_width="360dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/square"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:textColor="@color/cian"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        tools:layout_editor_absoluteX="18dp" />
-
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="359dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="168dp"
-        android:background="@drawable/square"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        android:textColor="@color/cian"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        tools:layout_editor_absoluteX="18dp" />
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.myapplication.NoteEditFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
