@@ -50,7 +50,7 @@ public class NoteEditActivity extends AppCompatActivity {
 
     }
 
-    public void BackData(String name,String url,String login,String password) {
+    public void OnClickButtonBack(String name,String url,String login,String password) {
         Intent returnIntent = new Intent();
         returnIntent.putExtra(MainActivity.KEY_NAME, name);
         returnIntent.putExtra(MainActivity.KEY_URL, url);

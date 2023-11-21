@@ -47,7 +47,7 @@ public class NoteEditFragment extends Fragment {
                 public void onClick(View view) {
                     NoteEditActivity activity = (NoteEditActivity) getActivity();
                     if (activity != null) {
-                        activity.BackData(NameEditText.getText().toString(), UrlEditText.getText().toString(),LoginEditText.getText().toString(),PasswordEditText.getText().toString());
+                        activity.OnClickButtonBack(NameEditText.getText().toString(), UrlEditText.getText().toString(),LoginEditText.getText().toString(),PasswordEditText.getText().toString());
                     }
                 }
             });

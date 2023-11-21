@@ -11,7 +11,7 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="BackData"
+        android:onClick="OnClickButtonBack"
         android:text="Назад"
         android:textColor="#FF0000"
         app:layout_constraintStart_toStartOf="parent"
