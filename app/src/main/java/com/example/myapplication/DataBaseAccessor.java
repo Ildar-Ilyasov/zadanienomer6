@@ -10,7 +10,7 @@ import android.widget.SimpleCursorAdapter;
 public class DataBaseAccessor extends SQLiteOpenHelper
 {
     // Основные данные базы
-    private static final String DATABASE_NAME = "db6.db";
+    private static final String DATABASE_NAME = "db7.db";
     private static final int DB_VERSION = 4;
 
     // таблицы
