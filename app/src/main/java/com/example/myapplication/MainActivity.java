@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     ListView ThemesListView;
-
     SimpleCursorAdapter noteAdapter;
     DataBaseAccessor db;
 

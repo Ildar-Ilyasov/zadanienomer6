@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 public class NoteEditFragment extends Fragment {
     EditText NameEditText;
     EditText UrlEditText;

@@ -9,30 +9,18 @@ import android.view.View;
 import android.widget.EditText;
 
 public class NoteEditActivity extends AppCompatActivity {
-
-    EditText NameEditText;
-    EditText UrlEditText;
-    EditText LoginEditText;
-    EditText PasswordEditText;
     int Position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_edit);
-
         Intent fromMainActivityIntent = getIntent();
 
         String Notename = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_NAME);
         String Noteurl = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_URL);
         String Notelogin = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_LOGIN);
         String Notepassword = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_PASSWORD);
-
-        //NameEditText.setText(fromMainActivityIntent.getExtras().getString("name"));
-        //UrlEditText.setText(fromMainActivityIntent.getExtras().getString("url"));
-        //LoginEditText.setText(fromMainActivityIntent.getExtras().getString("login"));
-        //PasswordEditText.setText(fromMainActivityIntent.getExtras().getString("password"));
-        //Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION, -1);
 
         //создание фрагмента
         NoteEditFragment fragment = new NoteEditFragment();
@@ -47,7 +35,6 @@ public class NoteEditActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
 
         Position = fromMainActivityIntent.getIntExtra(MainActivity.KEY_POSITION, -1);
-
     }
 
     public void OnClickButtonBack(String name,String url,String login,String password) {
@@ -59,6 +46,5 @@ public class NoteEditActivity extends AppCompatActivity {
         returnIntent.putExtra(MainActivity.KEY_POSITION, Position);
         setResult(RESULT_OK, returnIntent);
         finish();
-
     }
 }
