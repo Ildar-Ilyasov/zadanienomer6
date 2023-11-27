@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> AdapterUpdate(ArrayList<websiten> list) {
 
         ArrayList<String> stringList = serverAccessor.getStringListFromNoteList(list);
-        //String[] bebs = {stringList.get(0), stringList.get(1)};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,stringList);
         // установить адаптер в listview
