@@ -61,9 +61,4 @@ public class postReq extends AsyncTask<String, Void, String> {
             return null;
         }
     }
-
-    @Override
-    protected void onPostExecute(String result) {
-        // Здесь можно обработать полученный результат
-    }
 }

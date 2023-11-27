@@ -72,7 +72,6 @@ public class NoteEditFragment extends Fragment {
                         progressTask.url = UrlEditText.getText().toString();
                         progressTask.pas = PasswordEditText.getText().toString();
                         progressTask.web = NameEditText.getText().toString();
-
                         executorService.submit(progressTask);
                         activity.OnClickButtonBack(NameEditText.getText().toString(), UrlEditText.getText().toString(),LoginEditText.getText().toString(),PasswordEditText.getText().toString());
                     }
