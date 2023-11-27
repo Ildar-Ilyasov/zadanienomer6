@@ -51,11 +51,8 @@ public class ServerAccessor {
     public Map<String, String> getObject(websiten obj_){
         HashMap<String, String> infer = new HashMap<>();
         infer.put("website", obj_.website);
-        //System.out.println(film.info);
         infer.put("url", obj_.url);
-        //System.out.println(film.comm);
         infer.put("login", obj_.login);
-        //System.out.println(film.image);
         infer.put("password", obj_.password);
         return infer;
     }
