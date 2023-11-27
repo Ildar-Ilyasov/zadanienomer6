@@ -17,7 +17,7 @@ public class NoteEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_edit);
         Intent fromMainActivityIntent = getIntent();
 
-        String Notename = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_NAME);
+        String Notename = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_WEBSITE);
         String Noteurl = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_URL);
         String Notelogin = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_LOGIN);
         String Notepassword = fromMainActivityIntent.getExtras().getString(MainActivity.KEY_PASSWORD);
@@ -26,7 +26,7 @@ public class NoteEditActivity extends AppCompatActivity {
         NoteEditFragment fragment = new NoteEditFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivity.KEY_NAME, Notename);
+        bundle.putString(MainActivity.KEY_WEBSITE, Notename);
         bundle.putString(MainActivity.KEY_URL, Noteurl);
         bundle.putString(MainActivity.KEY_LOGIN, Notelogin);
         bundle.putString(MainActivity.KEY_PASSWORD, Notepassword);
@@ -39,7 +39,7 @@ public class NoteEditActivity extends AppCompatActivity {
 
     public void OnClickButtonBack(String name,String url,String login,String password) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(MainActivity.KEY_NAME, name);
+        returnIntent.putExtra(MainActivity.KEY_WEBSITE, name);
         returnIntent.putExtra(MainActivity.KEY_URL, url);
         returnIntent.putExtra(MainActivity.KEY_LOGIN, login);
         returnIntent.putExtra(MainActivity.KEY_PASSWORD, password);

@@ -5,117 +5,165 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.database.Cursor;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    final public static String KEY_POSITION = "position";
-    final public static String KEY_NAME = "name";
+    final public static String KEY_WEBSITE = "website";
     final public static String KEY_URL = "url";
     final public static String KEY_LOGIN = "login";
     final public static String KEY_PASSWORD = "password";
-
+    final public static String KEY_POSITION = "position";
+    private  static final int MY_PERMISSIONS_REQUEST_INTERNET = 777;
+    private  static final String SERVICE_ADDRESS = "http://37.77.105.18/api/PasswordManager";
 
     ListView ThemesListView;
-    SimpleCursorAdapter noteAdapter;
-    DataBaseAccessor db;
+    ArrayAdapter<String> noteAdapter;
+    //DataBaseAccessor db;
 
     // создание launcher для получения данных из дочерней активити
     ActivityResultLauncher<Intent> NotesLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                    // все ли хорошо при получении данных из дочерней активити?
                     if(result.getResultCode() == Activity.RESULT_OK)
                     {
                         //получить данные
                         Intent returnedIntent = result.getData();
-                        int id = returnedIntent.getIntExtra(KEY_POSITION,-1);
-                        String name = returnedIntent.getStringExtra("name");
-                        String url = returnedIntent.getStringExtra("url");
-                        String login = returnedIntent.getStringExtra("login");
-                        String password = returnedIntent.getStringExtra("password");
-                        //обновить БД и интерфейс
-                        db.updateNote(id,name,url,login,password);
-                        noteAdapter = AdapterUpdate();
+                        String web = returnedIntent.getStringExtra(KEY_WEBSITE);
+                        String url = returnedIntent.getStringExtra(KEY_URL);
+                        String login = returnedIntent.getStringExtra(KEY_LOGIN);
+                        String password = returnedIntent.getStringExtra(KEY_PASSWORD);
                     }
-                    else
-                    {
-                        Log.d("MainActivity" ,"Invalid note activity result");
-                    }
+
                 }
             });
 
+//
+
+    ArrayList<websiten> websites;
+    ArrayAdapter<String> websitesAdapter;
+    ServerAccessor serverAccessor = new ServerAccessor(SERVICE_ADDRESS);
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    Intent NoteIntent;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // создать аксессор к бд
-        db = new DataBaseAccessor(this);
-
         setContentView(R.layout.activity_main);
         ThemesListView = findViewById(R.id.ListView);
 
-        noteAdapter = AdapterUpdate();
-        Intent NoteIntent = new Intent(this, NoteEditActivity.class);
 
-        // обработка клика по listView
-        ThemesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        websitesAdapter = AdapterUpdate(new ArrayList<websiten>());
+        NoteIntent = new Intent(this, NoteEditActivity.class);
+        Button backButton = findViewById(R.id.button3);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
-                //Добыть данные из адаптера
-                String name = ((Cursor) noteAdapter.getItem(position)).getString(1);
-                String url = ((Cursor) noteAdapter.getItem(position)).getString(2);
-                String login = ((Cursor) noteAdapter.getItem(position)).getString(3);
-                String password = ((Cursor) noteAdapter.getItem(position)).getString(4);
-
-                Toast.makeText(MainActivity.this, login, Toast.LENGTH_SHORT).show();
-                //отправить данные в дочернюю акливити
-                NoteIntent.putExtra("name", name);
-                NoteIntent.putExtra("url", url);
-                NoteIntent.putExtra("login", login);
-                NoteIntent.putExtra("password", password);
-
-                //id - идентификатор записи в БД
-                //без приведения к int перидется и получать long а я не хотел переписывать дочернюю активити
-                NoteIntent.putExtra(KEY_POSITION, (int)id);
+            public void onClick(View view) {
+                NoteIntent.putExtra(KEY_WEBSITE, "none");
+                NoteIntent.putExtra(KEY_URL, "");
+                NoteIntent.putExtra(KEY_LOGIN, "");
+                NoteIntent.putExtra(KEY_PASSWORD, "");
                 //запустить дочернюю активити
                 NotesLauncher.launch(NoteIntent);
             }
         });
+           // обработка клика по listView
+        ThemesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                System.out.println("----------------------------------");
+                serverAccessor.getObject(websites.get(position));
+
+                Map<String, String> data = serverAccessor.getObject(websites.get(position));
+                String web = data.get("website");
+                String url = data.get("url");
+                String login = data.get("login");
+                String password = data.get("password");
+
+                System.out.println(web);
+                System.out.println(url);
+                System.out.println(login);
+                System.out.println(password);
+
+                NoteIntent.putExtra(KEY_WEBSITE, web);
+                NoteIntent.putExtra(KEY_URL, url);
+                NoteIntent.putExtra(KEY_LOGIN, login);
+                NoteIntent.putExtra(KEY_PASSWORD, password);
+
+
+
+                //запустить дочернюю активити
+                NotesLauncher.launch(NoteIntent);
+            }
+        });
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Разрешение не предоставлено, запросить его у пользователя
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, MY_PERMISSIONS_REQUEST_INTERNET);
+        }
+
+        //Запуск фоновой задачи
+        ProgressTask progressTask = new ProgressTask();
+        executorService.submit(progressTask);
     }
 
-    private SimpleCursorAdapter AdapterUpdate() {
-        // получить адаптер из класса
-        SimpleCursorAdapter adapter = db.getCursorAdapter(this,
-                android.R.layout.two_line_list_item, // Разметка одного элемента ListView
-                new int[]{android.R.id.text1,android.R.id.text2}); // текст этого элемента
+    private ArrayAdapter<String> AdapterUpdate(ArrayList<websiten> list) {
 
+        ArrayList<String> stringList = serverAccessor.getStringListFromNoteList(list);
+        //String[] bebs = {stringList.get(0), stringList.get(1)};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,stringList);
         // установить адаптер в listview
         ThemesListView.setAdapter(adapter);
         return adapter;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // закрыть БД
-        db.close();
-    }
-    public static boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+
+    //  // выбор режима отображеня
+    class ProgressTask implements Runnable {
+        String connectionError = null;
+
+        @Override
+        public void run() {
+            try {
+                // выполнение в фоне
+                websites = serverAccessor.getData();
+
+                // Обновление UI осуществляется в основном потоке
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (connectionError == null) {
+                            websitesAdapter = AdapterUpdate(websites);
+                        } else {
+                            //проблемы с интернетом
+                        }
+                    }
+                });
+
+            } catch (Exception ex) {
+                connectionError = ex.getMessage();
+            }
+        }
     }
 }
